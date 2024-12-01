@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+### Personal Notes Manager
+A full-stack Notes Manager application where users can securely sign up, log in, and manage their personal notes. The app features user authentication, note filtering, and user-specific data storage.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Features
 
-## Available Scripts
+1. User Authentication: Secure signup and login using JWT.
+2. User-Specific Notes: Each user's notes are stored and managed separately.
+3. Filter Notes: Filter notes by category or search by title.
+4. Responsive UI: Designed for both desktop and mobile devices.
+5. Secure API: Protects routes with authentication middleware.
 
-In the project directory, you can run:
+## Tech Stack
+# Frontend
 
-### `npm start`
+1. React.js: For building the user interface.
+2. Axios: For making HTTP requests to the backend.
+3. Bootstrap: For responsive and user-friendly design.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# Backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. Node.js: Runtime environment for server-side logic.
+2. Express.js: Web framework for handling API routes.
+3. MongoDB: Database to store user and notes data.
+4. Mongoose: For MongoDB object modeling.
+5. JWT: Secure user authentication with JSON Web Tokens.
 
-### `npm test`
+## API Endpoints
+# Authentication Routes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. POST /auth/signup: Register a new user.
+2. POST /auth/login: Log in an existing user and receive a JWT token.
 
-### `npm run build`
+# Notes Routes (Protected)
+4. GET /notes: Retrieve all notes for the logged-in user (supports filters).
+5. POST /notes: Create a new note (user-specific).
+6. PUT /notes/:id: Update a specific note.
+7. DELETE /notes/:id: Delete a specific note.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Sign Up: Register a new account on the signup page.
+2. Log In: Log in with your credentials to receive a secure session token.
+3. Manage Notes:
+    1. Add, edit, or delete notes.
+    2. Filter notes by category or search by title.
+4. Secure Access: Only authenticated users can access the application.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Troubleshooting
+# Common Errors
 
-### `npm run eject`
+1. Invalid or Expired Token:
+    1. Ensure the token is correctly stored in Cookies and sent with the Authorization header. 
+    2. Check the JWT_SECRET value in .env.
+2. Database Connection Issues:
+    1. Verify the DB_URI is correct and accessible.
+    2. Ensure MongoDB service is running.
+3. User-Specific Notes Not Appearing:
+    1. Verify that userId is correctly populated from the token in the authenticate middleware.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Enhancements
+1. Implement note sharing with other users.
+2. Add categories for better note organization.
+3. Include additional security features like rate limiting and email verification.
