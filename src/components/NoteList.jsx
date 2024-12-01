@@ -23,7 +23,7 @@ const NoteList = (props) =>{
                             className="list-group-item d-flex justify-content-between align-items-start border border-secondary rounded p-2 mb-3"
                         >
                             <div className="col-8">
-                                <h6 className="mb-1">{note.title} <span className="text-muted small" style={{fontSize: "0.8rem"}}>({format(new Date(note.createdAt), ("dd-MM-yyyy"))})</span></h6>
+                                <h5 className="mb-1">{note.title} <span className="text-muted small ms-1" style={{fontSize: "0.8rem"}}>({format(new Date(note.createdAt), ("dd-MM-yyyy"))})</span></h5>
                                 <p className="mb-1">{note.description}</p>
                                 {/* <span className="text-muted">{format(new Date(note.createdAt), ("yyyy-MM-dd HH:mm:ss"))}</span> */}
                             </div>
