@@ -1,4 +1,4 @@
-### Personal Notes Manager
+### Personal Notes Manager ###
 A full-stack Notes Manager application where users can securely sign up, log in, and manage their personal notes. The app features user authentication, note filtering, and user-specific data storage.
 
 ## Features
