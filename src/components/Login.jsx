@@ -14,6 +14,7 @@ const Login = (props) =>{
     });
     const [trigger, setTrigger] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() =>{
@@ -34,9 +35,8 @@ const Login = (props) =>{
             onLoginSuccess();
             navigate('/');
         }catch(err){
-            console.log(err);
             setLoading(false);
-            alert("Login Failed! Invalid Credentials")
+            setError(err.response?.data?.message);
         }
     }
 
@@ -89,9 +89,10 @@ const Login = (props) =>{
                         />
                         <label className="form-check-label ps-1" htmlFor="checkbox">Show Password</label>
                     </div>
-                    <button type="submit" className="btn btn-primary w-100 mt-3">
+                    <button type="submit" className="btn btn-primary w-100 mt-3 mb-0">
                         {loading? (<BeatLoader color="#ffffff" size={15} data-testid="loader" />) : loginText}
                     </button>
+                    {error? <p className="m-0" style={{color:"#f70f26"}}>*{error}</p>: ""}
                 </form>
                 <div>
                     <p className="mt-2 mb-1">Don't have an account? </p>

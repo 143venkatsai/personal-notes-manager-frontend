@@ -14,6 +14,7 @@ const SignUp = (props) =>{
     });
     const [trigger, setTrigger] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -26,7 +27,7 @@ const SignUp = (props) =>{
         }catch(err){
             setLoading(false);
             console.log("Signup Error:", err);
-            alert("Signup Failed!" + (err.response?.data?.message || ""));
+            setError(err.response?.data?.message || "");
         }
     }
 
@@ -95,6 +96,7 @@ const SignUp = (props) =>{
                     <button type="submit" className="btn btn-primary w-100 mt-3">
                         {loading ? (<BeatLoader color="#ffffff" size={15} data-testid="loader" />): regsiterText }    
                     </button>
+                    {error? <p className="m-0" style={{color:"#f70f26"}}>*{error}</p>: ""}
                 </form>
                 <div>
                     <p className="mt-2 mb-1">Already have an account? </p>
