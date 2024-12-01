@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { Link, useNavigate } from "react-router-dom"
-import Cookies from "js-cookie"
-import axios from "axios"
+import { Link, useNavigate } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 import "./style.css";
 
@@ -12,6 +13,7 @@ const Login = (props) =>{
         password: ""
     });
     const [trigger, setTrigger] = useState(false);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() =>{
@@ -23,14 +25,17 @@ const Login = (props) =>{
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        setLoading(true);
         try{
             const {data} = await axios.post("https://personal-notes-manager-backend-9.onrender.com/auth/login", formData)
             Cookies.set("token", data.token);
+            setLoading(false);
             alert("Login Success!!");
             onLoginSuccess();
             navigate('/');
         }catch(err){
             console.log(err);
+            setLoading(false);
             alert("Login Failed! Invalid Credentials")
         }
     }
@@ -39,6 +44,8 @@ const Login = (props) =>{
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
     }
+
+    const loginText = "Login";
 
     return(
         <div className="login-sign-up-container container">
@@ -82,7 +89,9 @@ const Login = (props) =>{
                         />
                         <label className="form-check-label ps-1" htmlFor="checkbox">Show Password</label>
                     </div>
-                    <button type="submit" className="btn btn-primary w-100 mt-3">Login</button>
+                    <button type="submit" className="btn btn-primary w-100 mt-3">
+                        {loading? (<BeatLoader color="#ffffff" size={15} data-testid="loader" />) : loginText}
+                    </button>
                 </form>
                 <div>
                     <p className="mt-2 mb-1">Don't have an account? </p>

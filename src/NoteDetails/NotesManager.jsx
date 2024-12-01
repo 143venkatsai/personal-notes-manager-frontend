@@ -10,11 +10,14 @@ import { fetchNotes, createNote, updateNote, deleteNote } from "../services/api"
 const NotesManager = () =>{
   const [notes, setNotes] = useState([]);
   const [editingNote, setEditingNote] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const loadNotes = async (filters = {}) =>{
     try{
+      setLoading(true);
       const {data} = await fetchNotes(filters);
+      setLoading(false);
       console.log(data);
       setNotes(data);
     }catch(error){
@@ -54,7 +57,7 @@ const NotesManager = () =>{
       <h1 className="text-center mb-4">Personal Notes Manager</h1>
       <SearchBar onSearch={loadNotes} />
       <NoteForm onSubmit={handleCreateOrUpdate} editingNote={editingNote} />
-      <NoteList notes={notes} onEdit={setEditingNote} onDelete={handleDelete} />
+      <NoteList notes={notes} onEdit={setEditingNote} onDelete={handleDelete} loading={loading} />
     </div>
   )
 }

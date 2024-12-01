@@ -1,5 +1,6 @@
 import  React, {useState} from "react";
 import { Link } from "react-router-dom";
+import BeatLoader from "react-spinners/BeatLoader";
 import axios from "axios";
 
 import "./style.css"
@@ -12,15 +13,19 @@ const SignUp = (props) =>{
         password: "",
     });
     const [trigger, setTrigger] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        setLoading(true);
         try{
             await axios.post("https://personal-notes-manager-backend-9.onrender.com/auth/signup", formData);
             alert("Signup successfull!! Please login!.");
+            setLoading(false);
             onSignupSuccess();
         }catch(err){
-            console.log("Signup Error:", err.response.data);
+            setLoading(false);
+            console.log("Signup Error:", err);
             alert("Signup Failed!" + (err.response?.data?.message || ""));
         }
     }
@@ -29,6 +34,8 @@ const SignUp = (props) =>{
         const {name, value} = e.target;
         setFormData({...formData, [name]: value});
     }
+
+    const regsiterText = "Register";
 
     return(
         <div className="login-sign-up-container container">
@@ -85,7 +92,9 @@ const SignUp = (props) =>{
                         />
                         <label className="form-check-label ps-1" htmlFor="checkbox">Show Password</label>
                     </div>
-                    <button type="submit" className="btn btn-primary w-100 mt-3">Register</button>
+                    <button type="submit" className="btn btn-primary w-100 mt-3">
+                        {loading ? (<BeatLoader color="#ffffff" size={15} data-testid="loader" />): regsiterText }    
+                    </button>
                 </form>
                 <div>
                     <p className="mt-2 mb-1">Already have an account? </p>
