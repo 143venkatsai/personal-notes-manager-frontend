@@ -1,4 +1,4 @@
-### Personal Notes Manager ###
+# Personal Notes Manager ###
 A full-stack Notes Manager application where users can securely sign up, log in, and manage their personal notes. The app features user authentication, note filtering, and user-specific data storage.
 
 ## Features
@@ -10,13 +10,13 @@ A full-stack Notes Manager application where users can securely sign up, log in,
 5. Secure API: Protects routes with authentication middleware.
 
 ## Tech Stack
-# Frontend
+### Frontend
 
 1. React.js: For building the user interface.
 2. Axios: For making HTTP requests to the backend.
 3. Bootstrap: For responsive and user-friendly design.
 
-# Backend
+### Backend
 
 1. Node.js: Runtime environment for server-side logic.
 2. Express.js: Web framework for handling API routes.
@@ -25,16 +25,16 @@ A full-stack Notes Manager application where users can securely sign up, log in,
 5. JWT: Secure user authentication with JSON Web Tokens.
 
 ## API Endpoints
-# Authentication Routes
+### Authentication Routes
 
 1. POST /auth/signup: Register a new user.
 2. POST /auth/login: Log in an existing user and receive a JWT token.
 
-# Notes Routes (Protected)
-4. GET /notes: Retrieve all notes for the logged-in user (supports filters).
-5. POST /notes: Create a new note (user-specific).
-6. PUT /notes/:id: Update a specific note.
-7. DELETE /notes/:id: Delete a specific note.
+### Notes Routes (Protected)
+1. GET /notes: Retrieve all notes for the logged-in user (supports filters).
+2. POST /notes: Create a new note (user-specific).
+3. PUT /notes/:id: Update a specific note.
+4. DELETE /notes/:id: Delete a specific note.
 
 ## Usage
 
@@ -46,7 +46,7 @@ A full-stack Notes Manager application where users can securely sign up, log in,
 4. Secure Access: Only authenticated users can access the application.
 
 ## Troubleshooting
-# Common Errors
+### Common Errors
 
 1. Invalid or Expired Token:
     1. Ensure the token is correctly stored in Cookies and sent with the Authorization header. 
