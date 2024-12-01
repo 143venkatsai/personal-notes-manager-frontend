@@ -1,52 +1,29 @@
 import React, {useState, useEffect} from "react";
-
-import NoteList from "./components/NoteList";
-import NoteForm from "./components/NoteForm";
-import SearchBar from "./components/SearchBar";
-import { fetchNotes, createNote, updateNote, deleteNote } from "./services/api";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom"
+import Cookies from "js-cookie"
+import NotesManager from "./NoteDetails/NotesManager"
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
 
 const App = () =>{
-  const [notes, setNotes] = useState([]);
-  const [editingNote, setEditingNote] = useState(null);
-
-  const loadNotes = async (filters = {}) =>{
-    try{
-      const {data} = await fetchNotes(filters);
-      console.log(data);
-      setNotes(data);
-    }catch(error){
-      console.error(error);
-      setNotes([])
-    }
-  }
-
-  const handleCreateOrUpdate = async (note) =>{
-    if(editingNote){
-      await updateNote(editingNote._id, note);
-    }else{
-      await createNote(note);
-    }
-    setEditingNote(null);
-    loadNotes();
-  }
-
-  const handleDelete = async(id) =>{
-    await deleteNote(id);
-    loadNotes();
-  }
+  const [isAuthenticated, setIsAuthenticated] = useState(!!Cookies.get("token"));
 
   useEffect(() =>{
-    loadNotes();
-  }, [])
+    const token = Cookies.get("token");
+    setIsAuthenticated(!!token);
+  },[]);
+
+  const handleLoginSuccess = () => setIsAuthenticated(true);
+  const handleSignupSuccess = () => window.location.href = "/login";
 
   return(
-    <div className="container mt-4">
-      <h1 className="text-center mb-4">Personal Notes Manager</h1>
-      <SearchBar onSearch={loadNotes} />
-      <NoteForm onSubmit={handleCreateOrUpdate} editingNote={editingNote} />
-      <NoteList notes={notes} onEdit={setEditingNote} onDelete={handleDelete} />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={isAuthenticated ? <NotesManager /> : <Navigate to="/signup" />} />
+        <Route path="/signup" element={<SignUp onSignupSuccess={handleSignupSuccess} />} />
+        <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+      </Routes>
+    </Router>
   )
 }
-
 export default App

@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 
-
 const NoteForm = (props) =>{
     const {onSubmit, editingNote} = props;
     const [note, setNote]= useState({

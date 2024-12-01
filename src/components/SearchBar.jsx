@@ -19,7 +19,7 @@ const SearchBar = (props) =>{
 
 
     return(
-        <form onSubmit={handleSearch} className="mb-4">
+        <form onSubmit={handleSearch} className="mb-4 border p-3 rounded border-secondary">
             <div className="row">
                 <div className="col-md-6 mb-2">
                     <input 
@@ -45,7 +45,7 @@ const SearchBar = (props) =>{
                     </select>
                 </div>
                 <div className="col-md-2 mt-2">
-                    <button type="submit" className="btn btn-primary w-100">Search</button>
+                    <button type="submit" className="btn btn-primary w-100">Apply Filters</button>
                 </div>
             </div>
         </form>
